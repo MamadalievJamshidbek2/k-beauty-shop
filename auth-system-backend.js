@@ -459,7 +459,8 @@ document.getElementById("registerForm")?.addEventListener("submit", async (e) =>
       })
     });
 
-    const data = await response.json();
+    const resText = await response.text();
+    console.log("Server javobi:", resText);
 
     if (!response.ok) {
       msg.textContent = "❌ Xatolik: " + (data.message || "Ro‘yxatdan o‘tishda xato");
