@@ -1,50 +1,106 @@
-// Temporary user ID (login bo‘lsa token orqali olamiz)
-const USER_ID = 1;
+(async function() {
+  const API_BASE = "https://cosmetic-server-production.up.railway.app/api/products";
 
-// URL dan product ID olish
-function getProductId() {
-  const params = new URLSearchParams(window.location.search);
-  return Number(params.get("id"));
-}
-
-// Quantity boshqaruvi
-let qty = 1;
-
-document.getElementById("qtyMinus").onclick = () => {
-  if (qty > 1) qty--;
-  document.getElementById("qtyValue").textContent = qty;
-};
-
-document.getElementById("qtyPlus").onclick = () => {
-  qty++;
-  document.getElementById("qtyValue").textContent = qty;
-};
-
-// Savatchaga qo‘shish
-document.getElementById("addToCartBtn").onclick = async () => {
-  const productId = getProductId();
-
-  if (!productId) {
-    alert("❌ Product ID topilmadi!");
-    return;
+  // URL dan ID olish
+  function getProductId() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get("id")) || 1;
   }
 
-  try {
-    await cartAdd(USER_ID, productId, qty);
+  // API dan product olish
+  async function fetchProduct() {
+    const id = getProductId();
 
-    const btn = document.getElementById("addToCartBtn");
-    btn.textContent = "Qo‘shildi ✓";
-    btn.style.background = "#4CAF50";
+    try {
+      const res = await fetch(`${API_BASE}/${id}`);
 
-    setTimeout(() => {
-      btn.textContent = "Savatchaga qo‘shish";
-      btn.style.background = "";
-    }, 1500);
+      if (!res.ok) throw new Error("Serverga ulanishda xato");
 
-    // Savatcha belgisini yangilash uchun custom event
-    document.dispatchEvent(new Event("cart-updated"));
-
-  } catch (err) {
-    alert("❌ Xatolik: " + err.message);
+      return await res.json();
+    } catch (error) {
+      console.error("API Error:", error);
+      alert("❌ Serverdan ma'lumot olishda xato!");
+      return null;
+    }
   }
-};
+
+  // Sahifaga product chiqarish
+  function renderProduct(product) {
+    if (!product) return;
+
+    document.getElementById("productTitle").textContent = product.name;
+    document.getElementById("productName").textContent = product.name;
+    document.getElementById("productBrand").textContent = product.category;
+    document.getElementById("productPrice").textContent = `$${product.price}`;
+    document.getElementById("productDescription").textContent =
+      product.description || "Tavsif mavjud emas";
+
+    document.getElementById("productCategory").textContent = product.category;
+    document.getElementById("productSKU").textContent = `KB-${String(product.id).padStart(3, "0")}`;
+
+    // Rasm
+    const mainImg = document.getElementById("mainImage");
+    mainImg.src = product.imageUrl;
+    mainImg.alt = product.name;
+
+    // Thumbnail yasash
+    const thumbs = document.getElementById("thumbnails");
+    thumbs.innerHTML = "";
+
+    for (let i = 0; i < 3; i++) {
+      const t = document.createElement("img");
+      t.src = product.imageUrl;
+      t.className = "thumbnail" + (i === 0 ? " active" : "");
+      t.onclick = () => changeMainImage(product.imageUrl, t);
+
+      thumbs.appendChild(t);
+    }
+  }
+
+  // Rasmni almashtirish
+  function changeMainImage(src, thumbElement) {
+    document.getElementById("mainImage").src = src;
+
+    document.querySelectorAll(".thumbnail").forEach(t => t.classList.remove("active"));
+    thumbElement.classList.add("active");
+  }
+
+  // Add to Cart funksiyasi ishlasin
+  function setupCart(product) {
+    const CART_KEY = "myshop_cart_v1";
+
+    document.getElementById("addToCartBtn").addEventListener("click", () => {
+      let cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+
+      const exists = cart.find(p => p.id === product.id);
+
+      if (exists) {
+        exists.qty++;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          img: product.imageUrl,
+          qty: 1
+        });
+      }
+
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+      alert("✅ Mahsulot savatchaga qo‘shildi!");
+    });
+  }
+
+  // PAGE START
+  async function init() {
+    const product = await fetchProduct();
+
+    if (!product) return;
+
+    renderProduct(product);
+    setupCart(product);
+  }
+
+  init();
+})();
