@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahsulot - K-BEAUTY</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .product-detail-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 40px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 30px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .breadcrumb a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: #c2925e;
+    }
+
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .product-images {
+      position: sticky;
+      top: 100px;
+    }
+
+    .main-image {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .thumbnail-images {
+      display: flex;
+      gap: 15px;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+      object-fit: cover;
+    }
+
+    .thumbnail:hover,
+    .thumbnail.active {
+      border-color: #c2925e;
+      transform: scale(1.05);
+    }
+
+    .product-info h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #111;
+    }
+
+    .product-brand {
+      color: #c2925e;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stars {
+      color: #f4c542;
+      font-size: 18px;
+    }
+
+    .review-count {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .product-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 20px;
+    }
+
+    .price-old {
+      font-size: 24px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 10px;
+    }
+
+    .price-discount {
+      display: inline-block;
+      background: #e84a5f;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .product-description {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .product-features {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .product-features h3 {
+      margin-bottom: 15px;
+      color: #111;
+    }
+
+    .product-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-features li {
+      padding: 8px 0;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-features li::before {
+      content: "✓";
+      color: #c2925e;
+      font-weight: bold;
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .quantity-selector label {
+      font-weight: 600;
+      color: #111;
+    }
+
+    .quantity-controls-detail {
+      display: flex;
+      align-items: center;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .quantity-controls-detail button {
+      background: white;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .quantity-controls-detail button:hover {
+      background: #f0f0f0;
+    }
+
+    .quantity-controls-detail input {
+      width: 60px;
+      text-align: center;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .btn-add-cart {
+      flex: 1;
+      background: #111;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-add-cart:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    .btn-wishlist {
+      background: white;
+      border: 2px solid #ddd;
+      padding: 16px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 20px;
+    }
+
+    .btn-wishlist:hover {
+      border-color: #e84a5f;
+      color: #e84a5f;
+    }
+
+    .btn-wishlist.active {
+      background: #e84a5f;
+      color: white;
+      border-color: #e84a5f;
+    }
+
+    .product-meta {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .product-meta div {
+      margin-bottom: 10px;
+    }
+
+    .product-meta strong {
+      color: #111;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 40px;
+    }
+
+    .reviews-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .reviews-header h2 {
+      font-size: 28px;
+      color: #111;
+    }
+
+    .btn-write-review {
+      background: #c2925e;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-write-review:hover {
+      background: #a87d4a;
+      transform: translateY(-2px);
+    }
+
+    .review-item {
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .reviewer-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #c2925e;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .reviewer-name {
+      font-weight: 600;
+      color: #111;
+    }
+
+    .review-date {
+      color: #999;
+      font-size: 14px;
+    }
+
+    .review-stars {
+      color: #f4c542;
+    }
+
+    .review-text {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Review Modal */
+    .review-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .review-modal.active {
+      display: flex;
+    }
+
+    .review-modal-content {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      padding: 30px;
+      border-radius: 12px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .review-modal h3 {
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .rating-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+
+    .rating-input span {
+      cursor: pointer;
+      color: #ddd;
+      transition: color 0.3s;
+    }
+
+    .rating-input span:hover,
+    .rating-input span.active {
+      color: #f4c542;
+    }
+
+    .review-form textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      resize: vertical;
+      margin-bottom: 20px;
+    }
+
+    .review-form-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .product-images {
+        position: static;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="back-link">← Orqaga qaytish</a>
+
+  <div class="product-detail-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html">Bosh sahifa</a> / <a href="search-results.html">Mahsulotlar</a> / <span id="productName">Mahsulot</span>
+    </div>
+
+    <!-- Product Detail Grid -->
+    <div class="product-detail-grid">
+      <!-- Images -->
+      <div class="product-images">
+        <img id="mainImage" src="" alt="Product" class="main-image">
+        <div class="thumbnail-images" id="thumbnails">
+          <!-- Thumbnails will be loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <div class="product-brand" id="productBrand">BRAND</div>
+        <h1 id="productTitle">Product Name</h1>
+        
+        <div class="product-rating">
+          <div class="stars" id="productStars">⭐⭐⭐⭐⭐</div>
+          <span class="review-count" id="reviewCount">(0 sharhlar)</span>
+        </div>
+
+        <div class="product-price">
+          <span id="productPrice">$0</span>
+          <span class="price-old" id="productOldPrice"></span>
+          <span class="price-discount" id="productDiscount"></span>
+        </div>
+
+        <p class="product-description" id="productDescription">
+          Mahsulot tavsifi yuklanmoqda...
+        </p>
+
+        <div class="product-features">
+          <h3>Xususiyatlari:</h3>
+          <ul id="productFeatures">
+            <li>Premium Korean ingredients</li>
+            <li>Long-lasting fragrance</li>
+            <li>Suitable for all skin types</li>
+            <li>Eco-friendly packaging</li>
+          </ul>
+        </div>
+
+        <div class="quantity-selector">
+          <label>Miqdor:</label>
+          <div class="quantity-controls-detail">
+            <button id="qtyMinus">-</button>
+            <input type="number" id="quantity" value="1" min="1" max="99">
+            <button id="qtyPlus">+</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-add-cart" id="addToCartBtn">
+            Savatchaga qo'shish
+          </button>
+          <button class="btn-wishlist" id="wishlistBtn" title="Sevimlilarga qo'shish">
+            ❤
+          </button>
+        </div>
+
+        <div class="product-meta">
+          <div><strong>SKU:</strong> <span id="productSKU">KB-001</span></div>
+          <div><strong>Kategoriya:</strong> <span id="productCategory">Perfume</span></div>
+          <div><strong>Mavjud:</strong> <span style="color: #4CAF50;">✓ Omborda bor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <h2>Sharhlar</h2>
+      <button class="btn-write-review" id="writeReviewBtn">Sharh qoldirish</button>
+    </div>
+
+    <div id="reviewsList">
+      <!-- Reviews will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Review Modal -->
+  <div class="review-modal" id="reviewModal">
+    <div class="review-modal-content">
+      <h3>Sharh qoldirish</h3>
+      <form class="review-form" id="reviewForm">
+        <label>Reyting:</label>
+        <div class="rating-input" id="ratingInput">
+          <span data-rating="1">☆</span>
+          <span data-rating="2">☆</span>
+          <span data-rating="3">☆</span>
+          <span data-rating="4">☆</span>
+          <span data-rating="5">☆</span>
+        </div>
+
+        <label>Sizning fikringiz:</label>
+        <textarea id="reviewText" required placeholder="Mahsulot haqida fikringizni yozing..."></textarea>
+
+        <div class="review-form-buttons">
+          <button type="submit" class="btn-add-cart">Yuborish</button>
+          <button type="button" class="btn-ghost" id="cancelReview">Bekor qilish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cart Modal (same as before) -->
+  <div id="cartModal" class="modal" aria-hidden="true">
+    <div class="modal-content cart-card">
+      <button class="close x-btn" id="closeCart">&times;</button>
+      <h2>Savatcha</h2>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-totals">
+          <div>Subtotal:</div>
+          <div id="cartSubtotal">$0.00</div>
+        </div>
+        <div class="cart-actions">
+          <button id="clearCartBtn" class="btn-ghost">Tozalash</button>
+          <a id="goToCheckout" href="checkout.html" class="btn-primary">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+
+  <button id="cartBtn" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: #111; color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999;">🛒</button>
+
+  <!-- Scripts -->
+ 
+  <script src="product-detail.js"></script>
+  <script src="wishlist.js"></script>
+  <script src="reviews.js"></script>
+  <script src="api-service.js"></script>
+<script src="loading-system.js"></script>
+<script src="auth-system-backend.js"></script>
+<script src="products-loader.js"></script>
+<script src="cart-system-backend.js"></script>
+<script src="footer-scroll.js"></script>
+
+</body>
+
+</html>

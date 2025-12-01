@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAMBURINS - K-BEAUTY</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .brand-hero {
+      background: linear-gradient(135deg, #667eea 0%, #b945a9 100%);
+      color: white;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .brand-hero h1 {
+      font-size: 64px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+    }
+
+    .brand-hero p {
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    .brand-info {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .brand-info h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .brand-info p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 30px 40px;
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #667eea;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Back Link -->
+  <a href="index.html" class="back-link">← Bosh sahifaga qaytish</a>
+
+  <!-- Brand Hero -->
+  <div class="brand-hero">
+    <h1>TAMBURINS</h1>
+    <p>Premium Korean luxury perfumes crafted with the finest ingredients from around the world</p>
+  </div>
+
+  <!-- Brand Info -->
+  <div class="brand-info">
+    <h2>Brand haqida</h2>
+    <p>
+      TAMBURINS - bu Janubiy Koreyaning eng mashhur parfyumeriya brendlaridan biri. 
+      2010-yilda tashkil etilgan LOE o'zining noyob hidlari va yuqori sifati bilan 
+      butun dunyo bo'ylab tanilgan. Har bir parfyum tabiiy ingredientlardan tayyorlanadi 
+      va sizning shaxsiy stilingizni ta'kidlaydi.
+    </p>
+  </div>
+
+  <!-- Products Section -->
+  <section class="section">
+    <h2 class="section-title">BTSO KOLLEKSIYASI</h2>
+    <div class="products">
+      
+      <div class="product" data-name="LOE Midnight Rose" data-price="55" data-img="images/rasim1.jpg">
+        <img src="images/images7.jpg" alt="LOE Midnight Rose">
+        <h3>TAMBURINS Midnight Rose</h3>
+        <div class="rating">⭐ 4.9/5</div>
+        <p class="price">$55</p>
+      </div>
+
+      <div class="product" data-name="LOE Ocean Dreams" data-price="48" data-img="images/rasim3.jpg">
+        <img src="images/images8.jpg" alt="LOE Ocean Dreams">
+        <h3>TAMBURINS Ocean Dreams</h3>
+        <div class="rating">⭐ 4.7/5</div>
+        <p class="price">$48</p>
+      </div>
+
+      <div class="product" data-name="LOE Golden Hour" data-price="62" data-img="images/rasim5.jpg">
+        <img src="images/images9.jpg" alt="LOE Golden Hour">
+        <h3>TAMBURINS Golden Hour</h3>
+        <div class="rating">⭐ 5.0/5</div>
+        <p class="price">$62</p>
+      </div>
+
+      <div class="product" data-name="LOE Fresh Breeze" data-price="45" data-img="images/rasim6.jpg">
+        <img src="images/images10.jpg" alt="LOE Fresh Breeze">
+        <h3>TAMBURINS Fresh Breeze</h3>
+        <div class="rating">⭐ 4.6/5</div>
+        <p class="price">$45</p>
+      </div>
+
+      <div class="product" data-name="LOE Velvet Touch" data-price="58" data-img="images/rasim7.jpg">
+        <img src="images/images1.jpg" alt="LOE Velvet Touch">
+        <h3>TAMBURINS Velvet Touch</h3>
+        <div class="rating">⭐ 4.8/5</div>
+        <p class="price">$58</p>
+      </div>
+
+      <div class="product" data-name="LOE Cherry Blossom" data-price="52" data-img="images/rasim8.jpg">
+        <img src="images/images2.jpg" alt="LOE Cherry Blossom">
+        <h3>TAMBURINS Cherry Blossom</h3>
+        <div class="rating">⭐ 4.9/5</div>
+        <p class="price">$52</p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Cart Modal (same as main page) -->
+  <div id="cartModal" class="modal" aria-hidden="true">
+    <div class="modal-content cart-card">
+      <button class="close x-btn" id="closeCart">&times;</button>
+      <h2>Savatcha</h2>
+
+      <div id="cartItems" class="cart-items">
+        <!-- Dynamic cart items -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-totals">
+          <div>Subtotal:</div>
+          <div id="cartSubtotal">$0.00</div>
+        </div>
+        <div class="cart-actions">
+          <button id="clearCartBtn" class="btn-ghost">Tozalash</button>
+          <a id="goToCheckout" href="checkout.html" class="btn-primary">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Floating Cart Button -->
+  <button id="cartBtn" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: #111; color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 999;">
+    🛒
+  </button>
+
+  <!-- JavaScript (Same cart system as main page) -->
+  <script>
+    (function () {
+      const CART_STORAGE_KEY = 'myshop_cart_v1';
+      const productSelector = '.product';
+      const autoButtonHTML = '<button class="add-to-cart-btn small">Savatchaga qo\'shish</button>';
+
+      let cart = [];
+
+      function formatPrice(p) { return '$' + Number(p).toFixed(2); }
+
+      function loadCart() {
+        try {
+          cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+        } catch (e) { 
+          cart = []; 
+        }
+        updateCartCount();
+      }
+
+      function saveCart() {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      }
+
+      function updateCartCount() {
+        const countEl = document.getElementById('cartCount');
+        if (!countEl) return;
+        const total = cart.reduce((s, i) => s + (i.qty || 1), 0);
+        countEl.textContent = total;
+      }
+
+      function findIndexByName(name) { 
+        return cart.findIndex(it => it.name === name); 
+      }
+
+      function addToCart(product) {
+        const idx = findIndexByName(product.name);
+        if (idx >= 0) { 
+          cart[idx].qty += 1; 
+        } else { 
+          cart.push({ ...product, qty: 1 }); 
+        }
+        saveCart(); 
+        updateCartCount(); 
+        renderCartItems();
+      }
+
+      function removeFromCart(index) {
+        if (index >= 0 && index < cart.length) {
+          cart.splice(index, 1);
+          saveCart(); 
+          updateCartCount(); 
+          renderCartItems();
+        }
+      }
+
+      function changeQty(index, delta) {
+        if (index < 0 || index >= cart.length) return;
+        cart[index].qty = Math.max(1, cart[index].qty + delta);
+        saveCart(); 
+        updateCartCount(); 
+        renderCartItems();
+      }
+
+      function clearCart() { 
+        cart = []; 
+        saveCart(); 
+        updateCartCount(); 
+        renderCartItems(); 
+      }
+
+      function renderCartItems() {
+        const container = document.getElementById('cartItems');
+        const subtotalEl = document.getElementById('cartSubtotal');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (cart.length === 0) {
+          container.innerHTML = '<p>Savatcha bo\'sh</p>';
+          if (subtotalEl) subtotalEl.textContent = formatPrice(0);
+          return;
+        }
+
+        let subtotal = 0;
+        cart.forEach((item, idx) => {
+          subtotal += item.price * item.qty;
+          const itemEl = document.createElement('div');
+          itemEl.className = 'cart-item';
+          itemEl.innerHTML = `
+            <img src="${item.img || 'https://via.placeholder.com/80'}" alt="${item.name}">
+            <div class="meta">
+              <h4>${item.name}</h4>
+              <div class="small muted">${formatPrice(item.price)} each</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end">
+              <div class="qty-controls">
+                <button data-idx="${idx}" class="qty-minus">-</button>
+                <div style="min-width:28px;text-align:center">${item.qty}</div>
+                <button data-idx="${idx}" class="qty-plus">+</button>
+                <button data-idx="${idx}" class="remove-btn">O'chirish</button>
+              </div>
+              <div style="margin-top:6px;font-weight:600">${formatPrice(item.price * item.qty)}</div>
+            </div>
+          `;
+          container.appendChild(itemEl);
+        });
+
+        if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+
+        container.querySelectorAll('.qty-plus').forEach(b => {
+          b.addEventListener('click', () => changeQty(Number(b.dataset.idx), +1));
+        });
+        container.querySelectorAll('.qty-minus').forEach(b => {
+          b.addEventListener('click', () => changeQty(Number(b.dataset.idx), -1));
+        });
+        container.querySelectorAll('.remove-btn').forEach(b => {
+          b.addEventListener('click', () => removeFromCart(Number(b.dataset.idx)));
+        });
+      }
+
+      function injectAddButtons() {
+        document.querySelectorAll(productSelector).forEach(prod => {
+          if (prod.querySelector('.add-to-cart-btn')) return;
+          const div = document.createElement('div');
+          div.innerHTML = autoButtonHTML;
+          prod.appendChild(div.firstChild);
+        });
+      }
+
+      function setupAddToCartListeners() {
+        document.body.addEventListener('click', (e) => {
+          const btn = e.target.closest('.add-to-cart-btn');
+          if (!btn) return;
+          
+          const prod = btn.closest(productSelector);
+          if (!prod) return;
+          
+          const name = prod.dataset.name || (prod.querySelector('h3')?.innerText || 'No name');
+          const price = parseFloat(prod.dataset.price || (prod.querySelector('.price')?.innerText?.replace(/[^0-9.]/g, '') || '0')) || 0;
+          const img = prod.dataset.img || (prod.querySelector('img')?.getAttribute('src') || '');
+          
+          addToCart({ name, price, img });
+          
+          btn.textContent = 'Qo\'shildi ✓';
+          setTimeout(() => btn.textContent = 'Savatchaga qo\'shish', 900);
+        });
+      }
+
+      function setupCartUI() {
+        const cartBtn = document.getElementById('cartBtn');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const clearCartBtn = document.getElementById('clearCartBtn');
+        const overlay = document.getElementById('overlay');
+
+        if (cartBtn) {
+          cartBtn.addEventListener('click', () => {
+            renderCartItems();
+            cartModal.classList.add('active');
+            overlay.classList.add('active');
+          });
+        }
+        
+        if (closeCart) {
+          closeCart.addEventListener('click', () => { 
+            cartModal.classList.remove('active'); 
+            overlay.classList.remove('active');
+          });
+        }
+        
+        if (overlay) {
+          overlay.addEventListener('click', () => { 
+            cartModal.classList.remove('active'); 
+            overlay.classList.remove('active');
+          });
+        }
+        
+        if (clearCartBtn) {
+          clearCartBtn.addEventListener('click', () => clearCart());
+        }
+      }
+
+      function init() {
+        injectAddButtons();
+        loadCart();
+        setupAddToCartListeners();
+        setupCartUI();
+      }
+
+      if (document.readyState !== 'loading') init();
+      else document.addEventListener('DOMContentLoaded', init);
+
+      window.__MYSHOP_CART = { cart, addToCart, removeFromCart, clearCart, renderCartItems };
+    })();
+  </script>
+  <script src="api-service.js"></script>
+<script src="loading-system.js"></script>
+<script src="auth-system-backend.js"></script>
+<script src="products-loader.js"></script>
+<script src="cart-system-backend.js"></script>
+<script src="footer-scroll.js"></script>
+
+</body>
+
+</html>

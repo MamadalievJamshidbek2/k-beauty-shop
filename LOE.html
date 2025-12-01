@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOE - K-BEAUTY</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .brand-hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 40px; text-align: center; }
+    .brand-hero h1 { font-size: 64px; font-weight: 800; margin-bottom: 20px; letter-spacing: 4px; }
+    .brand-hero p { font-size: 20px; max-width: 600px; margin: 0 auto; opacity: 0.95; }
+    .brand-info { max-width: 900px; margin: 60px auto; padding: 0 40px; text-align: center; }
+    .brand-info h2 { font-size: 32px; margin-bottom: 20px; color: #111; }
+    .brand-info p { font-size: 18px; line-height: 1.8; color: #555; }
+    .back-link { display: inline-block; margin: 30px 40px; color: #111; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .back-link:hover { color: #667eea; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Bosh sahifaga qaytish</a>
+
+  <div class="brand-hero">
+    <h1>LOE</h1>
+    <p>Premium Korean luxury perfumes crafted with the finest ingredients from around the world</p>
+  </div>
+
+  <div class="brand-info">
+    <h2>Brand haqida</h2>
+    <p>LOE - bu Janubiy Koreyaning eng mashhur parfyumeriya brendlaridan biri. 2010-yilda tashkil etilgan LOE o'zining noyob hidlari va yuqori sifati bilan butun dunyo bo'ylab tanilgan. Har bir parfyum tabiiy ingredientlardan tayyorlanadi va sizning shaxsiy stilingizni ta'kidlaydi.</p>
+  </div>
+
+  <section class="section">
+    <h2 class="section-title">LOE KOLLEKSIYASI</h2>
+    <div class="products">
+      
+      <div class="product" data-name="LOE Midnight Rose" data-price="55" data-img="images/rasim9.jpg">
+        <img src="images/rasim9.jpg" alt="LOE Midnight Rose">
+        <h3>LOE Midnight Rose</h3>
+        <div class="rating">⭐ 4.9/5</div>
+        <p class="price">$55</p>
+      </div>
+
+      <div class="product" data-name="LOE Ocean Dreams" data-price="48" data-img="images/rasim10.jpg">
+        <img src="images/rasim10.jpg" alt="LOE Ocean Dreams">
+        <h3>LOE Ocean Dreams</h3>
+        <div class="rating">⭐ 4.7/5</div>
+        <p class="price">$48</p>
+      </div>
+
+      <div class="product" data-name="LOE Golden Hour" data-price="62" data-img="images/rasim11.jpg">
+        <img src="images/rasim11.jpg" alt="LOE Golden Hour">
+        <h3>LOE Golden Hour</h3>
+        <div class="rating">⭐ 5.0/5</div>
+        <p class="price">$62</p>
+      </div>
+
+      <div class="product" data-name="LOE Fresh Breeze" data-price="45" data-img="images/images1.jpg">
+        <img src="images/images1.jpg" alt="LOE Fresh Breeze">
+        <h3>LOE Fresh Breeze</h3>
+        <div class="rating">⭐ 4.6/5</div>
+        <p class="price">$45</p>
+      </div>
+
+      <div class="product" data-name="LOE Velvet Touch" data-price="58" data-img="images/images2.jpg">
+        <img src="images/images2.jpg" alt="LOE Velvet Touch">
+        <h3>LOE Velvet Touch</h3>
+        <div class="rating">⭐ 4.8/5</div>
+        <p class="price">$58</p>
+      </div>
+
+      <div class="product" data-name="LOE Cherry Blossom" data-price="52" data-img="images/images3.jpg">
+        <img src="images/images3.jpg" alt="LOE Cherry Blossom">
+        <h3>LOE Cherry Blossom</h3>
+        <div class="rating">⭐ 4.9/5</div>
+        <p class="price">$52</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content cart-card">
+      <button class="close x-btn" id="closeCart">&times;</button>
+      <h2>Savatcha</h2>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-totals">
+          <div>Subtotal:</div>
+          <div id="cartSubtotal">$0.00</div>
+        </div>
+        <div class="cart-actions">
+          <button id="clearCartBtn" class="btn-ghost">Tozalash</button>
+          <a id="goToCheckout" href="checkout.html" class="btn-primary">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+  <button id="cartBtn" style="position:fixed;bottom:30px;right:30px;width:60px;height:60px;border-radius:50%;background:#111;color:white;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:999;">🛒</button>
+
+  <!-- ✅ FOOTER QO'SHILDI -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-logo">K-BEAUTY</h3>
+        <p class="footer-desc">Premium Korean luxury perfumes</p>
+      </div>
+      <div class="footer-section">
+        <h4 class="footer-title">Havolalar</h4>
+        <ul class="footer-links">
+          <li><a href="parfum.html">Bosh sahifa</a></li>
+          <li><a href="about.html">Biz haqimizda</a></li>
+          <li><a href="contact.html">Bog'lanish</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 K-BEAUTY. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <button id="scrollToTop" class="scroll-to-top">↑</button>
+  <script src="footer-scroll.js"></script>
+
+  <!-- ✅ CART SYSTEM JS -->
+  <script>
+    (function () {
+      const CART_KEY = 'myshop_cart_v1';
+      let cart = [];
+
+      function loadCart() { try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {} }
+      function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+      function addToCart(product) {
+        const idx = cart.findIndex(i => i.name === product.name);
+        if (idx >= 0) cart[idx].qty += 1;
+        else cart.push({...product, qty: 1});
+        saveCart();
+        renderCartItems();
+      }
+
+      function removeFromCart(idx) { cart.splice(idx, 1); saveCart(); renderCartItems(); }
+      function changeQty(idx, delta) { cart[idx].qty = Math.max(1, cart[idx].qty + delta); saveCart(); renderCartItems(); }
+      function clearCart() { cart = []; saveCart(); renderCartItems(); }
+
+      function renderCartItems() {
+        const container = document.getElementById('cartItems');
+        const subtotal = document.getElementById('cartSubtotal');
+        container.innerHTML = '';
+        
+        if (cart.length === 0) {
+          container.innerHTML = '<p>Savatcha bo\'sh</p>';
+          subtotal.textContent = '$0.00';
+          return;
+        }
+
+        let total = 0;
+        cart.forEach((item, idx) => {
+          total += item.price * item.qty;
+          container.innerHTML += `
+            <div class="cart-item">
+              <img src="${item.img}" alt="${item.name}">
+              <div class="meta">
+                <h4>${item.name}</h4>
+                <div class="small muted">$${item.price} each</div>
+              </div>
+              <div style="text-align:right">
+                <div class="qty-controls">
+                  <button onclick="window.changeQty(${idx}, -1)">-</button>
+                  <span>${item.qty}</span>
+                  <button onclick="window.changeQty(${idx}, 1)">+</button>
+                  <button class="remove-btn" onclick="window.removeFromCart(${idx})">O'chirish</button>
+                </div>
+                <div style="font-weight:600">$${(item.price * item.qty).toFixed(2)}</div>
+              </div>
+            </div>
+          `;
+        });
+        subtotal.textContent = '$' + total.toFixed(2);
+      }
+
+      document.querySelectorAll('.product').forEach(prod => {
+        const btn = document.createElement('button');
+        btn.className = 'add-to-cart-btn small';
+        btn.textContent = 'Savatchaga qo\'shish';
+        btn.onclick = () => {
+          addToCart({
+            name: prod.dataset.name,
+            price: parseFloat(prod.dataset.price),
+            img: prod.dataset.img
+          });
+          btn.textContent = 'Qo\'shildi ✓';
+          setTimeout(() => btn.textContent = 'Savatchaga qo\'shish', 900);
+        };
+        prod.appendChild(btn);
+      });
+
+      document.getElementById('cartBtn').onclick = () => {
+        renderCartItems();
+        document.getElementById('cartModal').classList.add('active');
+        document.getElementById('overlay').classList.add('active');
+      };
+
+      document.getElementById('closeCart').onclick = () => {
+        document.getElementById('cartModal').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+      };
+
+      document.getElementById('overlay').onclick = () => {
+        document.getElementById('cartModal').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+      };
+
+      document.getElementById('clearCartBtn').onclick = () => clearCart();
+
+      window.changeQty = changeQty;
+      window.removeFromCart = removeFromCart;
+
+      loadCart();
+    })();
+  </script>
+  <script src="footer-scroll.js"> </script>
+<!-- API Integration Scripts -->
+<script src="api-service.js"></script>
+<script src="loading-system.js"></script>
+<script src="auth-system-backend.js"></script>
+<script src="products-loader.js"></script>
+<script src="cart-system-backend.js"></script>
+</body>
+</html>

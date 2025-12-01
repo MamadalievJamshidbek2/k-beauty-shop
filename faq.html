@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - K-BEAUTY</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .faq-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+
+    .faq-hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .faq-hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .faq-hero p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .faq-categories {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .faq-category-btn {
+      padding: 10px 20px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .faq-category-btn:hover,
+    .faq-category-btn.active {
+      border-color: #111;
+      background: #111;
+      color: white;
+    }
+
+    .faq-item {
+      background: white;
+      border: 2px solid #f0f0f0;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+      border-color: #c2925e;
+    }
+
+    .faq-question {
+      padding: 20px 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-question h3 {
+      font-size: 18px;
+      color: #111;
+      font-weight: 600;
+      margin: 0;
+      flex: 1;
+    }
+
+    .faq-icon {
+      font-size: 24px;
+      color: #c2925e;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer-content {
+      padding: 0 25px 20px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+    }
+
+    .contact-cta {
+      background: #f9f9f9;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .contact-cta h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #111;
+    }
+
+    .contact-cta p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .contact-cta a {
+      display: inline-block;
+      background: #111;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .contact-cta a:hover {
+      background: #c2925e;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="back-link">← Bosh sahifaga qaytish</a>
+
+  <div class="faq-container">
+    <!-- Hero -->
+    <div class="faq-hero">
+      <h1>Ko'p beriladigan savollar</h1>
+      <p>Sizni qiziqtirgan savolga javob toping</p>
+    </div>
+
+    <!-- Categories -->
+    <div class="faq-categories">
+      <button class="faq-category-btn active" onclick="filterFAQ('all')">Barchasi</button>
+      <button class="faq-category-btn" onclick="filterFAQ('order')">Buyurtma</button>
+      <button class="faq-category-btn" onclick="filterFAQ('delivery')">Yetkazib berish</button>
+      <button class="faq-category-btn" onclick="filterFAQ('product')">Mahsulotlar</button>
+      <button class="faq-category-btn" onclick="filterFAQ('payment')">To'lov</button>
+    </div>
+
+    <!-- FAQ Items -->
+    <div class="faq-list">
+      <!-- Order FAQs -->
+      <div class="faq-item" data-category="order">
+        <div class="faq-question">
+          <h3>Qanday qilib buyurtma berishim mumkin?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Buyurtma berish juda oddiy! Kerakli mahsulotni tanlang, "Savatchaga qo'shish" tugmasini bosing, 
+            keyin savatchaga o'tib "Checkout" tugmasini bosing. Yetkazib berish ma'lumotlarini to'ldiring va 
+            buyurtmangizni tasdiqlang.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="order">
+        <div class="faq-question">
+          <h3>Buyurtmani bekor qilish mumkinmi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Ha, buyurtma jo'natilgunga qadar bekor qilishingiz mumkin. Bekor qilish uchun bizga 
+            +998 90 123 45 67 raqamiga qo'ng'iroq qiling yoki info@kbeauty.uz ga email yuboring.
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery FAQs -->
+      <div class="faq-item" data-category="delivery">
+        <div class="faq-question">
+          <h3>Yetkazib berish qancha vaqt oladi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Toshkent shahri bo'ylab yetkazib berish 1-2 ish kuni ichida amalga oshiriladi. 
+            Boshqa viloyatlarga yetkazib berish 3-5 ish kunini tashkil qiladi. Tezkor yetkazib berish 
+            xizmatidan foydalansangiz, buyurtmangizni 24 soat ichida olishingiz mumkin.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="delivery">
+        <div class="faq-question">
+          <h3>Yetkazib berish narxi qancha?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Toshkent shahri ichida yetkazib berish - 20,000 so'm. 100,000 so'mdan ortiq buyurtmalarda 
+            yetkazib berish bepul! Boshqa viloyatlarga yetkazib berish narxi 30,000 - 50,000 so'm oralig'ida.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="delivery">
+        <div class="faq-question">
+          <h3>Buyurtmani qayerdan olishim mumkin?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Siz buyurtmani to'g'ridan-to'g'ri bizning do'konimizdan olishingiz mumkin. Manzil: 
+            Toshkent shahri, Chilonzor tumani, Bunyodkor ko'chasi, 1-uy. Ish vaqti: Dushanba-Juma 9:00-18:00.
+          </div>
+        </div>
+      </div>
+
+      <!-- Product FAQs -->
+      <div class="faq-item" data-category="product">
+        <div class="faq-question">
+          <h3>Mahsulotlar originalmimi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Albatta! Biz faqat original va sertifikatlangan mahsulotlarni sotamiz. Barcha mahsulotlar 
+            to'g'ridan-to'g'ri Janubiy Koreyadan keladi va zarur sertifikatlarga ega.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product">
+        <div class="faq-question">
+          <h3>Mahsulotni qaytarish mumkinmi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Ha, agar mahsulot ochilmagan va shikastlanmagan bo'lsa, 14 kun ichida qaytarishingiz mumkin. 
+            Qaytarish uchun chek va mahsulotning asl qadoqi kerak bo'ladi.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product">
+        <div class="faq-question">
+          <h3>Parfyumning saqlash muddati qancha?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Ochilmagan parfyumning saqlash muddati 3-5 yil. Ochilganidan keyin esa 1-2 yil ichida 
+            ishlatish tavsiya etiladi. Parfyumni quyosh nuridan va issiqdan uzoqda saqlang.
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment FAQs -->
+      <div class="faq-item" data-category="payment">
+        <div class="faq-question">
+          <h3>Qanday to'lov usullari mavjud?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Biz quyidagi to'lov usullarini qabul qilamiz:
+            <ul style="margin-top: 10px; padding-left: 20px;">
+              <li>Naqd pul (yetkazib berishda)</li>
+              <li>Plastik karta (Visa, MasterCard, Uzcard, Humo)</li>
+              <li>Payme</li>
+              <li>Click</li>
+              <li>Apelsin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="payment">
+        <div class="faq-question">
+          <h3>To'lov xavfsizmi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Ha, barcha onlayn to'lovlar SSL shifrlash orqali himoyalangan. Biz sizning karta 
+            ma'lumotlaringizni saqlamaymiz. Barcha to'lovlar xavfsiz to'lov tizimlar orqali amalga oshiriladi.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="payment">
+        <div class="faq-question">
+          <h3>Bo'lib-bo'lib to'lash mumkinmi?</h3>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Hozircha bo'lib-bo'lib to'lash xizmati mavjud emas. Lekin yaqin orada ushbu xizmatni 
+            qo'shishni rejalashtirmoqdamiz. Yangiliklar uchun bizni kuzatib boring!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="contact-cta">
+      <h2>Javob topa olmadingizmi?</h2>
+      <p>Biz sizga yordam berishga tayyormiz!</p>
+      <a href="contact.html">Biz bilan bog'laning</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-logo">K-BEAUTY</h3>
+        <p class="footer-desc">Premium Korean luxury perfumes</p>
+      </div>
+      <div class="footer-section">
+        <h4 class="footer-title">Havolalar</h4>
+        <ul class="footer-links">
+          <li><a href="parfum.html">Bosh sahifa</a></li>
+          <li><a href="about.html">Biz haqimizda</a></li>
+          <li><a href="contact.html">Bog'lanish</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 K-BEAUTY. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle FAQ items
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all other FAQs
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Toggle current FAQ
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+
+    // Filter FAQ by category
+    function filterFAQ(category) {
+      const items = document.querySelectorAll('.faq-item');
+      const buttons = document.querySelectorAll('.faq-category-btn');
+      
+      // Update active button
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Filter items
+      items.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+  <script src="api-service.js"></script>
+<script src="loading-system.js"></script>
+<script src="auth-system-backend.js"></script>
+<script src="products-loader.js"></script>
+<script src="cart-system-backend.js"></script>
+<script src="footer-scroll.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - K-BEAUTY</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .checkout-container { max-width: 1000px; margin: 50px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .checkout-container h1 { color: #111; margin-bottom: 30px; font-size: 32px; }
+    .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .order-summary { background: #f9f9f9; padding: 25px; border-radius: 10px; }
+    .order-summary h2 { margin-bottom: 20px; color: #111; font-size: 22px; }
+    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #e0e0e0; }
+    .order-item:last-child { border-bottom: none; }
+    .order-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; margin-right: 15px; }
+    .order-item-info { flex: 1; }
+    .order-item-name { font-weight: 600; color: #111; margin-bottom: 5px; }
+    .order-item-qty { font-size: 14px; color: #666; }
+    .order-item-price { font-weight: 700; color: #111; }
+    .order-total { display: flex; justify-content: space-between; padding-top: 20px; margin-top: 20px; border-top: 2px solid #111; font-size: 20px; font-weight: 700; color: #111; }
+    .checkout-form h2 { margin-bottom: 20px; color: #111; font-size: 22px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; font-family: 'Poppins', sans-serif; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .submit-btn { width: 100%; background: #111; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
+    .submit-btn:hover { background: #333; }
+    .back-btn { display: inline-block; margin-bottom: 20px; color: #111; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .back-btn:hover { color: #c2925e; }
+    .empty-cart { text-align: center; padding: 60px 20px; }
+    .empty-cart h2 { color: #666; margin-bottom: 20px; }
+    .empty-cart a { display: inline-block; background: #111; color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; transition: background 0.3s; }
+    .empty-cart a:hover { background: #333; }
+    @media (max-width: 768px) {
+      .checkout-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .checkout-container { padding: 20px; margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-container">
+    <a href="index.html" class="back-btn">← Orqaga qaytish</a>
+    <h1>Buyurtma berish</h1>
+    <div id="checkoutContent"></div>
+  </div>
+
+  <!-- ✅ FOOTER QO'SHILDI -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-logo">K-BEAUTY</h3>
+        <p class="footer-desc">Premium Korean luxury perfumes</p>
+      </div>
+      <div class="footer-section">
+        <h4 class="footer-title">Havolalar</h4>
+        <ul class="footer-links">
+          <li><a href="parfum.html">Bosh sahifa</a></li>
+          <li><a href="about.html">Biz haqimizda</a></li>
+          <li><a href="contact.html">Bog'lanish</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 K-BEAUTY. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <button id="scrollToTop" class="scroll-to-top">↑</button>
+  <script src="footer-scroll.js"></script>
+
+  <script>
+    const CART_STORAGE_KEY = 'myshop_cart_v1';
+    
+    function formatPrice(p) { return '$' + Number(p).toFixed(2); }
+
+    function loadCheckout() {
+      const cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+      const container = document.getElementById('checkoutContent');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <h2>Savatingiz bo'sh</h2>
+            <p>Buyurtma berish uchun avval mahsulot qo'shing</p>
+            <a href="parfum.html">Xarid qilishni boshlash</a>
+          </div>
+        `;
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => { subtotal += item.price * item.qty; });
+
+      let orderItemsHTML = '';
+      cart.forEach(item => {
+        orderItemsHTML += `
+          <div class="order-item">
+            <img src="${item.img || 'https://via.placeholder.com/60'}" alt="${item.name}">
+            <div class="order-item-info">
+              <div class="order-item-name">${item.name}</div>
+              <div class="order-item-qty">Miqdor: ${item.qty}</div>
+            </div>
+            <div class="order-item-price">${formatPrice(item.price * item.qty)}</div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="checkout-grid">
+          <div class="order-summary">
+            <h2>Buyurtma tafsilotlari</h2>
+            ${orderItemsHTML}
+            <div class="order-total">
+              <div>Jami:</div>
+              <div>${formatPrice(subtotal)}</div>
+            </div>
+          </div>
+
+          <div class="checkout-form">
+            <form id="checkoutForm">
+              <h2>Yetkazib berish ma'lumotlari</h2>
+              
+              <div class="form-group">
+                <label for="fullName">To'liq ism *</label>
+                <input type="text" id="fullName" required placeholder="Ismingiz va familiyangiz">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Telefon *</label>
+                  <input type="tel" id="phone" required placeholder="+998 90 123 45 67">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" placeholder="sizning@email.com">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address">Manzil *</label>
+                <textarea id="address" required placeholder="Ko'cha, uy raqami"></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">Shahar *</label>
+                  <input type="text" id="city" required placeholder="Toshkent">
+                </div>
+                <div class="form-group">
+                  <label for="region">Viloyat</label>
+                  <select id="region">
+                    <option value="">Tanlang</option>
+                    <option value="tashkent">Toshkent</option>
+                    <option value="samarkand">Samarqand</option>
+                    <option value="bukhara">Buxoro</option>
+                    <option value="andijan">Andijon</option>
+                    <option value="fergana">Farg'ona</option>
+                    <option value="namangan">Namangan</option>
+                    <option value="other">Boshqa</option>
+                  </select>
+                </div>
+              </div>
+
+              <h2 style="margin-top: 30px;">To'lov ma'lumotlari</h2>
+
+              <div class="form-group">
+                <label for="paymentMethod">To'lov usuli *</label>
+                <select id="paymentMethod" required>
+                  <option value="card">Plastik karta</option>
+                  <option value="cash">Naqd pul (yetkazib berishda)</option>
+                  <option value="payme">Payme</option>
+                  <option value="click">Click</option>
+                </select>
+              </div>
+
+              <div id="cardFields" style="display: block;">
+                <div class="form-group">
+                  <label for="cardNumber">Karta raqami</label>
+                  <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="cardExpiry">Amal qilish muddati</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                  </div>
+                  <div class="form-group">
+                    <label for="cardCVV">CVV</label>
+                    <input type="text" id="cardCVV" placeholder="123" maxlength="3">
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="submit-btn">Buyurtmani tasdiqlash (${formatPrice(subtotal)})</button>
+            </form>
+          </div>
+        </div>
+      `;
+
+      setupFormHandling();
+      setupPaymentMethodToggle();
+    }
+
+    function setupPaymentMethodToggle() {
+      const paymentMethod = document.getElementById('paymentMethod');
+      const cardFields = document.getElementById('cardFields');
+
+      if (paymentMethod && cardFields) {
+        paymentMethod.addEventListener('change', (e) => {
+          cardFields.style.display = e.target.value === 'card' ? 'block' : 'none';
+        });
+      }
+    }
+
+    function setupFormHandling() {
+      const form = document.getElementById('checkoutForm');
+      
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const formData = {
+            fullName: document.getElementById('fullName').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            region: document.getElementById('region').value,
+            paymentMethod: document.getElementById('paymentMethod').value,
+          };
+
+          console.log('Order submitted:', formData);
+          localStorage.removeItem(CART_STORAGE_KEY);
+          alert('✅ Buyurtma muvaffaqiyatli qabul qilindi!\n\nTez orada operatorlarimiz siz bilan bog\'lanadi.\n\nRahmat!');
+          window.location.href = 'parfum.html';
+        });
+      }
+
+      const cardNumber = document.getElementById('cardNumber');
+      if (cardNumber) {
+        cardNumber.addEventListener('input', (e) => {
+          let value = e.target.value.replace(/\s/g, '');
+          let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+          e.target.value = formattedValue;
+        });
+      }
+
+      const cardExpiry = document.getElementById('cardExpiry');
+      if (cardExpiry) {
+        cardExpiry.addEventListener('input', (e) => {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length >= 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+          }
+          e.target.value = value;
+        });
+      }
+    }
+
+    if (document.readyState !== 'loading') {
+      loadCheckout();
+    } else {
+      document.addEventListener('DOMContentLoaded', loadCheckout);
+    }
+  </script>
+  <script src="api-service.js"></script>
+<script src="loading-system.js"></script>
+<script src="auth-system-backend.js"></script>
+<script src="cart-system-backend.js"></script>
+<script src="checkout-backend.js"></script>
+</body>
+</html>
