@@ -2,16 +2,13 @@
 
 const API_BASE_URL = 'https://cosmetic-server-production.up.railway.app/api';
 
-// CORS Proxy for development (remove in production)
-const USE_PROXY = true;
+// CORS Proxy for development - DISABLED (not working with credentials)
+const USE_PROXY = false;
 const PROXY_URL = 'https://corsproxy.io/?';
 
 function getApiUrl(endpoint) {
   const fullUrl = `${API_BASE_URL}${endpoint}`;
-  // Only use proxy in development (localhost)
-  if (USE_PROXY && window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return PROXY_URL + encodeURIComponent(fullUrl);
-  }
+  // Proxy disabled
   return fullUrl;
 }
 
@@ -30,7 +27,7 @@ async function apiCall(endpoint, method = 'GET', body = null, token = null) {
     method,
     headers,
     mode: 'cors', // Enable CORS
-    credentials: 'include', // Include cookies if needed
+    // credentials removed - causes issues with CORS proxy
   };
 
   if (body && (method === 'POST' || method === 'PUT')) {
@@ -95,36 +92,81 @@ const AuthAPI = {
   // Register new user
   async register(userData) {
     try {
+      console.log('📝 Registering user:', userData.email);
+      
       const response = await apiCall('/auth/register', 'POST', {
         name: userData.name,
         email: userData.email,
         password: userData.password
       });
 
-      // Save token and user data
-      if (response.token) {
-        saveAuthToken(response.token, response.user);
+      console.log('✅ Register response:', response);
+
+      // Handle different response formats
+      if (response.token || response.data?.token) {
+        const token = response.token || response.data.token;
+        const user = response.user || response.data?.user || response.data;
+        
+        saveAuthToken(token, user);
+        
+        return { 
+          success: true, 
+          data: { token, user } 
+        };
+      }
+
+      // If no token but successful response
+      if (response.message || response.success) {
+        return { 
+          success: true, 
+          data: response 
+        };
       }
 
       return { success: true, data: response };
+      
     } catch (error) {
-      return { success: false, message: error.message };
+      console.error('❌ Register error:', error);
+      return { 
+        success: false, 
+        message: error.message || 'Registration failed' 
+      };
     }
   },
 
-  // Login user (if backend has login endpoint)
+  // Login user
   async login(email, password) {
     try {
-      // Adjust endpoint if your backend has different login URL
-      const response = await apiCall('/auth/login', 'POST', { email, password });
+      console.log('🔐 Logging in:', email);
       
-      if (response.token) {
-        saveAuthToken(response.token, response.user);
+      const response = await apiCall('/auth/login', 'POST', { 
+        email, 
+        password 
+      });
+
+      console.log('✅ Login response:', response);
+      
+      // Handle different response formats
+      if (response.token || response.data?.token) {
+        const token = response.token || response.data.token;
+        const user = response.user || response.data?.user || response.data;
+        
+        saveAuthToken(token, user);
+        
+        return { 
+          success: true, 
+          data: { token, user } 
+        };
       }
 
       return { success: true, data: response };
+      
     } catch (error) {
-      return { success: false, message: error.message };
+      console.error('❌ Login error:', error);
+      return { 
+        success: false, 
+        message: error.message || 'Login failed' 
+      };
     }
   }
 };
