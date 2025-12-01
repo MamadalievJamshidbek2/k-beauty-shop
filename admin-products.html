@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin – Manage Products</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Product Management (Admin)</h1>
+
+  <!-- FORM: Create / Update Product -->
+  <div class="admin-form">
+    <h2 id="formTitle">Add New Product</h2>
+
+    <input type="hidden" id="productId">
+
+    <label>Name</label>
+    <input type="text" id="pname">
+
+    <label>Description</label>
+    <input type="text" id="pdesc">
+
+    <label>Price</label>
+    <input type="number" id="pprice">
+
+    <label>Image URL</label>
+    <input type="text" id="pimage">
+
+    <label>Category</label>
+    <input type="text" id="pcategory">
+
+    <button onclick="createProduct()">Save Product</button>
+    <button id="updateBtn" onclick="updateProduct()" style="display:none;">Update Product</button>
+  </div>
+
+  <hr>
+
+  <!-- PRODUCT LIST -->
+  <h2>All Products</h2>
+  <div id="productList"></div>
+
+  <script src="admin-products.js"></script>
+</body>
+</html>
