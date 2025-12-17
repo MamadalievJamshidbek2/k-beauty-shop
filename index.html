@@ -1,721 +1,154 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>K-BEAUTY - Korean Luxury Perfumes</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Top Bar -->
-  <div class="topbar">
-    Sign up and get 20% off to your first order.
-    <a href="#" style="color:#fff;text-decoration:underline;margin-left:8px">Sign Up Now</a>
-  </div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="left">
-      <div class="logo">K-BEAUTY</div>
-      <nav>
-        <div onclick="window.location.href='index.html'">Shop</div>
-        <div onclick="scrollToSection('on-sale')">On Sale</div>
-        <div onclick="scrollToSection('new-arrivals')">New Arrivals</div>
-        <div onclick="scrollToSection('brands')">Brands</div>
-        <div onclick="window.location.href='about.html'">About</div>
-        <div onclick="window.location.href='contact.html'">Contact</div>
-      </nav>
-    </div>
-    <div style="display:flex;align-items:center;gap:16px;width:60%;max-width:760px;">
-      <div class="search">
-        <input id="searchInput" placeholder="Search for products..." />
-      </div>
-      <div class="actions">
-        <div>
-          <button id="cartBtn">🛒</button>
-        </div>
-        <div>
-          <button id="openLogin" class="btn-link">👤</button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-left">
-        <h1 class="headline">DISCOVER THE <br>ESSENCE OF <br>KOREAN LUXURY</h1>
-        <p class="desc">Explore our exquisite collection of carefully crafted perfumes – each designed to highlight your individuality and complement your unique style</p>
-        <a class="cta" href="#new-arrivals">Shop Now</a>
-
-        <div class="stats">
-          <div class="stat">
-            <h3>200+</h3>
-            <p>International Brands</p>
-          </div>
-          <div class="stat">
-            <h3>2,000+</h3>
-            <p>High-Quality Products</p>
-          </div>
-          <div class="stat">
-            <h3>30,000+</h3>
-            <p>Happy Customers</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <img src="images/rasim.log.jpg" alt="Korean Beauty Models" />
-      </div>
-    </section>
-
-    <!-- Brand Strip -->
-    <div class="brand-strip" id="brands">
-      <div class="brands">
-        <div class="brand" onclick="window.open('LOE.html', '_blank')">LOE</div>
-        <div class="brand" onclick="window.open('SW19.html', '_blank')">SW19</div>
-        <div class="brand" onclick="window.open('BTSO.html', '_blank')">BTSO</div>
-        <div class="brand" onclick="window.open('GRANHAND.html', '_blank')">GRANHAND</div>
-        <div class="brand" onclick="window.open('TAMBURINS.html', '_blank')">TAMBURINS</div>
-      </div>
-    </div>
-  </main>
-
-  <!-- New Arrivals Section -->
-  <section class="section" id="new-arrivals">
-    <h2 class="section-title">NEW ARRIVALS</h2>
-    
-    <!-- Filter Controls -->
-    <div class="filter-controls">
-      <div class="filter-group">
-        <label>Narx bo'yicha:</label>
-        <div class="filter-buttons">
-          <button class="filter-btn active" onclick="filterByPrice('all')">Barchasi</button>
-          <button class="filter-btn" onclick="filterByPrice(0, 20)">$0 - $20</button>
-          <button class="filter-btn" onclick="filterByPrice(20, 40)">$20 - $40</button>
-          <button class="filter-btn" onclick="filterByPrice(40, 100)">$40+</button>
-        </div>
-      </div>
-      
-      <div class="filter-group">
-        <label>Saralash:</label>
-        <select id="sortSelect" class="sort-select" onchange="sortProducts(this.value)">
-          <option value="default">Standart</option>
-          <option value="price-low">Narx: Pastdan yuqoriga</option>
-          <option value="price-high">Narx: Yuqoridan pastga</option>
-          <option value="rating">Reyting bo'yicha</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="products" id="newArrivalsProducts">
-      <div class="product" data-product-id="1" data-name="Floral Essence" data-price="12" data-rating="4.5" data-img="images/rasim1.jpg">
-        <img src="images/rasim1.jpg" alt="Floral Essence">
-        <h3>Floral Essence</h3>
-        <div class="rating">⭐ 4.5/5</div>
-        <p class="price">$12</p>
-      </div>
-
-      <div class="product" data-product-id="2" data-name="Ocean Breeze" data-price="40" data-rating="3.5" data-img="images/rasim3.jpg">
-        <img src="images/rasim3.jpg" alt="Ocean Breeze">
-        <h3>Ocean Breeze</h3>
-        <div class="rating">⭐ 3.5/5</div>
-        <p class="price">$40 <span class="old-price">$60</span> <span class="discount">-20%</span></p>
-      </div>
-
-      <div class="product" data-product-id="3" data-name="Citrus Garden" data-price="18" data-rating="4.5" data-img="images/rasim5.jpg">
-        <img src="images/rasim5.jpg" alt="Citrus Garden">
-        <h3>Citrus Garden</h3>
-        <div class="rating">⭐ 4.5/5</div>
-        <p class="price">$18</p>
-      </div>
-
-      <div class="product" data-product-id="4" data-name="Midnight Rose" data-price="30" data-rating="4.5" data-img="images/rasim6.jpg">
-        <img src="images/rasim6.jpg" alt="Midnight Rose">
-        <h3>Midnight Rose</h3>
-        <div class="rating">⭐ 4.5/5</div>
-        <p class="price">$30 <span class="old-price">$60</span> <span class="discount">-30%</span></p>
-      </div>
-    </div>
-    
-    <div id="noResults" class="no-results" style="display: none;">
-      <p>🔍 Hech narsa topilmadi</p>
-      <button class="view-btn" onclick="resetFilters()">Tozalash</button>
-    </div>
-    
-    <button class="view-btn" onclick="alert('Tez orada ko\'proq mahsulotlar qo\'shiladi!')">View All</button>
-  </section>
-
-  <!-- Top Selling Section -->
-  <section class="section" id="on-sale">
-    <h2 class="section-title">TOP SELLING</h2>
-    
-    <div class="products" id="topSellingProducts">
-      <div class="product" data-name="Velvet Dreams" data-price="21" data-rating="5.0" data-img="images/rasim7.jpg">
-        <img src="images/rasim7.jpg" alt="Velvet Dreams">
-        <h3>Velvet Dreams</h3>
-        <div class="rating">⭐ 5.0/5</div>
-        <p class="price">$21 <span class="old-price">$41</span> <span class="discount">-20%</span></p>
-      </div>
-
-      <div class="product" data-name="Golden Sunset" data-price="45" data-rating="4.0" data-img="images/rasim8.jpg">
-        <img src="images/rasim8.jpg" alt="Golden Sunset">
-        <h3>Golden Sunset</h3>
-        <div class="rating">⭐ 4.0/5</div>
-        <p class="price">$45</p>
-      </div>
-
-      <div class="product" data-name="Fresh Morning" data-price="20" data-rating="3.0" data-img="images/rasim1.jpg">
-        <img src="images/rasim1.jpg" alt="Fresh Morning">
-        <h3>Fresh Morning</h3>
-        <div class="rating">⭐ 3.0/5</div>
-        <p class="price">$20</p>
-      </div>
-
-      <div class="product" data-name="Cherry Blossom" data-price="10" data-rating="4.5" data-img="images/rasim3.jpg">
-        <img src="images/rasim3.jpg" alt="Cherry Blossom">
-        <h3>Cherry Blossom</h3>
-        <div class="rating">⭐ 4.5/5</div>
-        <p class="price">$10</p>
-      </div>
-    </div>
-    <button class="view-btn" onclick="alert('Tez orada ko\'proq mahsulotlar qo\'shiladi!')">View All</button>
-  </section>
- 
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  Sign up and get 20% off to your first order.
+  <a href="#" style="color:#fff;text-decoration:underline;margin-left:8px">Sign Up Now</a>
 </div>
 
-  <!-- Login Modal -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span id="closeLogin" class="close">&times;</span>
-      <h2>Login</h2>
-
-      <form id="loginForm">
-        <label>Full Name</label>
-        <input type="text" id="reg_name" required>
-        <label>Email</label>
-        <input type="email" id="email" required placeholder="you@mail.com">
-
-        <label>Password</label>
-        <input type="password" id="password" required placeholder="••••••••">
-
-        <button class="login-btn" type="submit">Login</button>
-      </form>
-
-      <div id="loginMsg" class="msg"></div>
-    </div>
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="left">
+    <div class="logo">K-BEAUTY</div>
+    <nav>
+      <div onclick="window.location.href='index.html'">Shop</div>
+      <div onclick="scrollToSection('new-arrivals')">New Arrivals</div>
+      <div onclick="scrollToSection('on-sale')">Top Selling</div>
+      <div onclick="window.location.href='about.html'">About</div>
+      <div onclick="window.location.href='contact.html'">Contact</div>
+    </nav>
   </div>
 
-  <!-- Cart Modal -->
-  <div id="cartModal" class="modal" aria-hidden="true">
-    <div class="modal-content cart-card">
-      
-      <h2>Savatcha</h2>
+  <div class="actions">
+    <input id="searchInput" placeholder="Search for products..." />
+    <button id="cartBtn">🛒</button>
+    <button id="openLogin">👤</button>
+  </div>
+</header>
 
-      <div id="cartItems" class="cart-items">
-        <!-- Dynamic cart items -->
-      </div>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-left">
+    <h1>DISCOVER THE <br>ESSENCE OF <br>KOREAN LUXURY</h1>
+    <p>Explore premium Korean perfumes crafted for individuality.</p>
+    <a href="#new-arrivals" class="cta">Shop Now</a>
+  </div>
+  <div class="hero-right">
+    <img src="images/rasim.log.jpg" alt="Korean Beauty">
+  </div>
+</section>
 
-      <div class="cart-footer">
-        <div class="cart-totals">
-          <div>Subtotal:</div>
-          <div id="cartSubtotal">$0.00</div>
-        </div>
-        <div class="cart-actions">
-          <button id="clearCartBtn" class="btn-ghost">Tozalash</button>
-          <a id="goToCheckout" href="checkout.html" class="btn-primary">Checkout</a>
-        </div>
-      </div>
+<!-- ===== NEW ARRIVALS ===== -->
+<section class="section" id="new-arrivals">
+  <h2 class="section-title">NEW ARRIVALS</h2>
+
+  <!-- 🔥 Backend API shu yerga mahsulotlarni joylaydi -->
+  <div class="products" id="newArrivalsProducts"></div>
+</section>
+
+<!-- ===== TOP SELLING ===== -->
+<section class="section" id="on-sale">
+  <h2 class="section-title">TOP SELLING</h2>
+
+  <!-- Hozircha statik, keyin backend qilamiz -->
+  <div class="products">
+    <div class="product">
+      <img src="images/rasim7.jpg">
+      <h3>Velvet Dreams</h3>
+      <p class="price">$21</p>
+    </div>
+    <div class="product">
+      <img src="images/rasim8.jpg">
+      <h3>Golden Sunset</h3>
+      <p class="price">$45</p>
     </div>
   </div>
+</section>
 
-  <!-- Overlay -->
-  <div id="overlay"></div>
+<!-- ===== LOGIN MODAL ===== -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span id="closeLogin" class="close">&times;</span>
+    <h2>Login</h2>
 
-  <!-- JavaScript -->
-  <script>
-    /* ====== Scroll to Section ====== */
-    function scrollToSection(id) {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
 
-    /* ====== Search Functionality - Redirect to search page ====== */
-    const searchInput = document.getElementById('searchInput');
+    <div id="loginMsg"></div>
+  </div>
+</div>
 
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const query = e.target.value.trim();
-        if (query) {
-          window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
-        }
-      }
-    });
+<!-- ===== CART MODAL ===== -->
+<div id="cartModal" class="modal">
+  <div class="modal-content cart-card">
+    <h2>Savatcha</h2>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <span>Subtotal:</span>
+      <span id="cartSubtotal">$0.00</span>
+      <a href="checkout.html">Checkout</a>
+    </div>
+  </div>
+</div>
 
-    // Optional: Add search icon/button
-    searchInput.addEventListener('focus', () => {
-      searchInput.placeholder = 'Qidirish uchun Enter bosing...';
-    });
+<div id="overlay"></div>
 
-    searchInput.addEventListener('blur', () => {
-      searchInput.placeholder = 'Search for products...';
-    });
-
-    /* ====== Filter by Price ====== */
-    function filterByPrice(min, max) {
-      const products = document.querySelectorAll('#newArrivalsProducts .product');
-      let visibleCount = 0;
-
-      // Update active button
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      products.forEach(product => {
-        const price = parseFloat(product.dataset.price || 0);
-        
-        if (min === 'all') {
-          product.style.display = 'block';
-          visibleCount++;
-        } else if (price >= min && price <= max) {
-          product.style.display = 'block';
-          visibleCount++;
-        } else {
-          product.style.display = 'none';
-        }
-      });
-
-      updateNoResultsMessage(visibleCount);
-    }
-
-    /* ====== Sort Products ====== */
-    function sortProducts(sortType) {
-      const container = document.getElementById('newArrivalsProducts');
-      const products = Array.from(container.querySelectorAll('.product'));
-
-      products.sort((a, b) => {
-        const priceA = parseFloat(a.dataset.price || 0);
-        const priceB = parseFloat(b.dataset.price || 0);
-        const ratingA = parseFloat(a.dataset.rating || 0);
-        const ratingB = parseFloat(b.dataset.rating || 0);
-
-        switch(sortType) {
-          case 'price-low':
-            return priceA - priceB;
-          case 'price-high':
-            return priceB - priceA;
-          case 'rating':
-            return ratingB - ratingA;
-          default:
-            return 0;
-        }
-      });
-
-      // Re-append sorted products
-      products.forEach(product => container.appendChild(product));
-    }
-
-    /* ====== Reset Filters ====== */
-    function resetFilters() {
-      searchInput.value = '';
-      document.getElementById('sortSelect').value = 'default';
-      
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelector('.filter-btn').classList.add('active');
-      
-      document.querySelectorAll('.product').forEach(p => p.style.display = 'block');
-      document.getElementById('noResults').style.display = 'none';
-    }
-
-    /* ====== No Results Message ====== */
-    function updateNoResultsMessage(count) {
-      const noResults = document.getElementById('noResults');
-      if (count === 0) {
-        noResults.style.display = 'block';
-      } else {
-        noResults.style.display = 'none';
-      }
-    }
-
-    /* ====== Login Modal ====== */
-    const modal = document.getElementById("loginModal");
-    document.getElementById("openLogin").onclick = () => modal.style.display = "flex";
-    document.getElementById("closeLogin").onclick = () => modal.style.display = "none";
-
-    window.onclick = (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    };
-
-    const form = document.getElementById("loginForm");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      const msg = document.getElementById("loginMsg");
-      msg.style.color = "red";
-
-      if (!email || !password) {
-        msg.textContent = "Barcha maydonlarni to'ldiring!";
-        return;
-      }
-
-      msg.style.color = "green";
-      msg.textContent = "Login successful!";
-      
-      setTimeout(() => {
-        modal.style.display = "none";
-        msg.textContent = "";
-        form.reset();
-      }, 1500);
-    });
-
-    /* ====== Cart System ====== */
-    (function () {
-      const CART_STORAGE_KEY = 'myshop_cart_v1';
-      const productSelector = '.product';
-      const autoButtonHTML = '<button class="add-to-cart-btn small">Savatchaga qo\'shish</button>';
-
-      let cart = [];
-
-      function formatPrice(p) { return '$' + Number(p).toFixed(2); }
-
-      function loadCart() {
-        try {
-          cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
-        } catch (e) { 
-          cart = []; 
-        }
-        updateCartCount();
-      }
-
-      function saveCart() {
-        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-      }
-
-      function updateCartCount() {
-        const countEl = document.getElementById('cartCount');
-        if (!countEl) return;
-        const total = cart.reduce((s, i) => s + (i.qty || 1), 0);
-        countEl.textContent = total;
-      }
-
-      function findIndexByName(name) { 
-        return cart.findIndex(it => it.name === name); 
-      }
-
-      function addToCart(product) {
-        const idx = findIndexByName(product.name);
-        if (idx >= 0) { 
-          cart[idx].qty += 1; 
-        } else { 
-          cart.push({ ...product, qty: 1 }); 
-        }
-        saveCart(); 
-        updateCartCount(); 
-        renderCartItems();
-      }
-
-      function removeFromCart(index) {
-        if (index >= 0 && index < cart.length) {
-          cart.splice(index, 1);
-          saveCart(); 
-          updateCartCount(); 
-          renderCartItems();
-        }
-      }
-
-      function changeQty(index, delta) {
-        if (index < 0 || index >= cart.length) return;
-        cart[index].qty = Math.max(1, cart[index].qty + delta);
-        saveCart(); 
-        updateCartCount(); 
-        renderCartItems();
-      }
-
-      function clearCart() { 
-        cart = []; 
-        saveCart(); 
-        updateCartCount(); 
-        renderCartItems(); 
-      }
-
-      function renderCartItems() {
-        const container = document.getElementById('cartItems');
-        const subtotalEl = document.getElementById('cartSubtotal');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        
-        if (cart.length === 0) {
-          container.innerHTML = '<p>Savatcha bo\'sh</p>';
-          if (subtotalEl) subtotalEl.textContent = formatPrice(0);
-          return;
-        }
-
-        let subtotal = 0;
-        cart.forEach((item, idx) => {
-          subtotal += item.price * item.qty;
-          const itemEl = document.createElement('div');
-          itemEl.className = 'cart-item';
-          itemEl.innerHTML = `
-            <img src="${item.img || 'https://via.placeholder.com/80'}" alt="${item.name}">
-            <div class="meta">
-              <h4>${item.name}</h4>
-              <div class="small muted">${formatPrice(item.price)} each</div>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end">
-              <div class="qty-controls">
-                <button data-idx="${idx}" class="qty-minus">-</button>
-                <div style="min-width:28px;text-align:center">${item.qty}</div>
-                <button data-idx="${idx}" class="qty-plus">+</button>
-                <button data-idx="${idx}" class="remove-btn">O'chirish</button>
-              </div>
-              <div style="margin-top:6px;font-weight:600">${formatPrice(item.price * item.qty)}</div>
-            </div>
-          `;
-          container.appendChild(itemEl);
-        });
-
-        if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
-
-        container.querySelectorAll('.qty-plus').forEach(b => {
-          b.addEventListener('click', () => changeQty(Number(b.dataset.idx), +1));
-        });
-        container.querySelectorAll('.qty-minus').forEach(b => {
-          b.addEventListener('click', () => changeQty(Number(b.dataset.idx), -1));
-        });
-        container.querySelectorAll('.remove-btn').forEach(b => {
-          b.addEventListener('click', () => removeFromCart(Number(b.dataset.idx)));
-        });
-      }
-
-      function injectAddButtons() {
-        document.querySelectorAll(productSelector).forEach(prod => {
-          if (prod.querySelector('.add-to-cart-btn')) return;
-          const div = document.createElement('div');
-          div.innerHTML = autoButtonHTML;
-          prod.appendChild(div.firstChild);
-        });
-      }
-
-      function setupProductClickListeners() {
-        // Product card click - go to detail page
-        document.body.addEventListener('click', (e) => {
-          const product = e.target.closest('.product');
-          if (!product || e.target.closest('.add-to-cart-btn')) return;
-          
-          const productId = product.dataset.productId;
-          if (productId) {
-            window.location.href = `product-detail.html?id=${productId}`;
-          }
-        });
-      }
-
-      function setupAddToCartListeners() {
-        document.body.addEventListener('click', (e) => {
-          const btn = e.target.closest('.add-to-cart-btn');
-          if (!btn) return;
-          
-          e.stopPropagation(); // Prevent product click
-          
-          const prod = btn.closest(productSelector);
-          if (!prod) return;
-          
-          const name = prod.dataset.name || (prod.querySelector('h3')?.innerText || 'No name');
-          const price = parseFloat(prod.dataset.price || (prod.querySelector('.price')?.innerText?.replace(/[^0-9.]/g, '') || '0')) || 0;
-          const img = prod.dataset.img || (prod.querySelector('img')?.getAttribute('src') || '');
-          
-          addToCart({ name, price, img });
-          
-          btn.textContent = 'Qo\'shildi ✓';
-          setTimeout(() => btn.textContent = 'Savatchaga qo\'shish', 900);
-        });
-      }
-
-      function setupCartUI() {
-        const cartBtn = document.getElementById('cartBtn');
-        const cartModal = document.getElementById('cartModal');
-        const closeCart = document.getElementById('closeCart');
-        const clearCartBtn = document.getElementById('clearCartBtn');
-        const overlay = document.getElementById('overlay');
-
-        if (cartBtn) {
-          cartBtn.addEventListener('click', () => {
-            renderCartItems();
-            cartModal.classList.add('active');
-            overlay.classList.add('active');
-          });
-        }
-        
-        if (closeCart) {
-          closeCart.addEventListener('click', () => { 
-            cartModal.classList.remove('active'); 
-            overlay.classList.remove('active');
-          });
-        }
-        
-        if (overlay) {
-          overlay.addEventListener('click', () => { 
-            cartModal.classList.remove('active'); 
-            overlay.classList.remove('active');
-          });
-        }
-        
-        if (clearCartBtn) {
-          clearCartBtn.addEventListener('click', () => clearCart());
-        }
-      }
-
-      function init() {
-        injectAddButtons();
-        loadCart();
-        setupProductClickListeners();
-        setupAddToCartListeners();
-        setupCartUI();
-      }
-
-      if (document.readyState !== 'loading') init();
-      else document.addEventListener('DOMContentLoaded', init);
-
-      window.__MYSHOP_CART = { cart, addToCart, removeFromCart, clearCart, renderCartItems };
-    })();
-  </script>
-  <!-- FOOTER  -->
-
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
-  <div class="footer-container">
-    <!-- Company Info -->
-    <div class="footer-section">
-      <h3 class="footer-logo">K-BEAUTY</h3>
-      <p class="footer-desc">Premium Korean luxury perfumes crafted with the finest ingredients from around the world.</p>
-      <div class="social-links">
-        <a href="#" class="social-icon" aria-label="Instagram">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
-            <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Twitter">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="YouTube">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="footer-section">
-      <h4 class="footer-title">Tez havolalar</h4>
-      <ul class="footer-links">
-        <li><a href="parfum.html">Bosh sahifa</a></li>
-        <li><a href="parfum.html#new-arrivals">Yangi mahsulotlar</a></li>
-        <li><a href="parfum.html#on-sale">Chegirmalar</a></li>
-        <li><a href="parfum.html#brands">Brendlar</a></li>
-        <li><a href="search-results.html">Barcha mahsulotlar</a></li>
-      </ul>
-    </div>
-
-    <!-- Customer Service -->
-    <div class="footer-section">
-      <h4 class="footer-title">Xizmatlar</h4>
-      <ul class="footer-links">
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="about.html">Biz haqimizda</a></li>
-        <li><a href="contact.html">Bog'lanish</a></li>
-        <li><a href="#">Yetkazib berish</a></li>
-        <li><a href="#">Qaytarish siyosati</a></li>
-      </ul>
-    </div>
-
-    <!-- Contact Info -->
-    <div class="footer-section">
-      <h4 class="footer-title">Bog'lanish</h4>
-      <ul class="footer-contact">
-        <li>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          Toshkent, O'zbekiston
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          +998 90 123 45 67
-        </li>
-        <li>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          info@kbeauty.uz
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div class="footer-bottom">
-    <p>&copy; 2024 K-BEAUTY. Barcha huquqlar himoyalangan.</p>
-    <div class="footer-bottom-links">
-      <a href="#">Maxfiylik siyosati</a>
-      <span>•</span>
-      <a href="#">Foydalanish shartlari</a>
-    </div>
-  </div>
+  <p>© 2024 K-BEAUTY. All rights reserved.</p>
 </footer>
 
-<!-- Scroll to Top Button -->
-<button id="scrollToTop" class="scroll-to-top" aria-label="Yuqoriga">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <polyline points="18 15 12 9 6 15"></polyline>
-  </svg>
-</button>
-<!-- 1. Birinchi - products-data.js (local fallback) -->
-<script src="products-data.js"></script>
+<!-- ================== SCRIPTS ================== -->
 
-<!-- 2. Loading system -->
-<script src="loading-system.js"></script>
+<script>
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
 
-<!-- 3. API service -->
-<script src="api-service.js"></script>
+  // Search redirect
+  document.getElementById("searchInput").addEventListener("keypress", e => {
+    if (e.key === "Enter") {
+      window.location.href = `search-results.html?q=${encodeURIComponent(e.target.value)}`;
+    }
+  });
 
-<!-- 4. Auth system -->
+  // Login modal
+  const loginModal = document.getElementById("loginModal");
+  document.getElementById("openLogin").onclick = () => loginModal.style.display = "flex";
+  document.getElementById("closeLogin").onclick = () => loginModal.style.display = "none";
+</script>
+
+<!-- 🔑 AUTH -->
 <script src="auth-system-backend.js"></script>
 
-<!-- 5. Products loader (API bilan) -->
+<!-- 🧴 PRODUCTS (BACKEND) -->
 <script src="products-loader.js"></script>
 
-<!-- 6. Cart system -->
+<!-- 🛒 CART (BACKEND ONLY) -->
+<script src="cart-service.js"></script>
 <script src="cart-system-backend.js"></script>
 
-<!-- 7. Footer -->
+<!-- UI -->
+<script src="loading-system.js"></script>
 <script src="footer-scroll.js"></script>
 
-<script src="cart-service.js"></script>
-
-
 </body>
-
 </html>
